@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins";
+  background-color: #09090b;
+  color: #fafafa !important;
+}
+
+.product-button {
+  color: #fafafa;
+  text-align: center;
+  border: 1px solid #fafafa;
+  padding: 5px;
+}
+
+.footer-list a:hover {
+  color: #fafafa !important;
+}
+
+.footer-list {
+  padding-bottom: 10px;
+}
