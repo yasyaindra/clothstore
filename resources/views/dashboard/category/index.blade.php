@@ -28,7 +28,7 @@
                 <a
                   type="button"
                   class="btn btn-primary"
-                  href="/8607101e-3b82-11ee-be56-0242ac120002/dashboard/product/create"
+                  href="/8607101e-3b82-11ee-be56-0242ac120002/dashboard/category/create"
                 >
                   Tambah
                 </a>
@@ -57,45 +57,34 @@
                   <thead>
                     <tr>
                       <th>Image</th>
-                      <th>Nama Produk</th>
-                      <th>Category</th>
+                      <th>Nama Kategori</th>
                       <th>Deskripsi</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($products as $product)
+                    @foreach ($categories as $category)
                     <tr>
-                      <td>  
-                        @if ($product->product_image !== "product.png")
+                      <td>
                         <img
-                          src="{{asset("storage/". $product->product_image)}}"
+                          src="{{asset("/assets/img/".$category->category_image)}}"
                           alt=""
                           class="img-fluid"
                           width="50"
                           height="50"
-                        />  
-                        @else
-                        <img
-                          src="{{asset("assets/img/product.png")}}"
-                          alt=""
-                          class="img-fluid"
-                          width="50"
-                          height="50"
-                        />  
-                        @endif
+                        />
                       </td>
-                      <td>{{$product->name}}</td>
-                      <td>{{$product->category->name}}</td>
+                      <td>{{$category->name}}</td>
+                      <td>Kaos</td>
                       <td>
-                        {{$product->description}}
+                        {{$category->description}}
                       </td>
                       <td>
-                        <a href="/8607101e-3b82-11ee-be56-0242ac120002/dashboard/product/{{$product->id}}/edit" class="btn btn-warning">
+                        <a href="/8607101e-3b82-11ee-be56-0242ac120002/dashboard/category/{{$category->id}}/edit" class="btn btn-warning">
                           Edit
                         </a>
 
-                        <form action="/8607101e-3b82-11ee-be56-0242ac120002/dashboard/product/{{$product->id}}" method="POST" class="d-inline">
+                        <form action="/8607101e-3b82-11ee-be56-0242ac120002/dashboard/category/{{$category->id}}" method="POST" class="d-inline">
                           @method("DELETE")
                           @csrf
                           <button type="submit" class="btn btn-danger">

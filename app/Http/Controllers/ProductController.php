@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('dashboard.product.index');
+        $product = Product::all();
+        return view('dashboard.product.index', ['products' => $product]);
     }
 
     /**
@@ -20,7 +22,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('dashboard.product.create');
+        $category = Category::all();
+        return view('dashboard.product.create', ['categories' => $category]);
     }
 
     /**
@@ -28,9 +31,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $request->validate([
             'name' => 'required|unique:products',
             'description' => 'required',
+            'product_image' => 'image|file|max:2024',
             'category_id' => 'required',
             'price' => 'required',
         ]);
@@ -38,6 +44,7 @@ class ProductController extends Controller
         $product = new Product([
             'name' => $request->name,
             'description' => $request->description,
+            'product_image' => $request->file('product_image')->store('assets/img'),
             'category_id' => $request->category_id,
             'price' => $request->price,
         ]);
@@ -60,7 +67,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $product = Product::find($product->id);
+        // dd($product);
+        return view("dashboard.product.edit", ['product' => $product]);
     }
 
     /**
@@ -68,7 +77,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'category_id' => 'required',
+            'price' => 'required',
+        ]);
+
+        // dd($request);
+        
+        Product::where('id', $product->id)->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'price' => $request->price
+        ]);
+
+        return redirect()->route('product.index')->with('success', 'Product is successfully updated!');
     }
 
     /**
@@ -76,6 +101,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $delete = Product::findOrFail($product->id);
+        $delete->delete();
+        return redirect()->route('product.index')->with('success','product deleted successfully');
     }
 }

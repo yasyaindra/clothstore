@@ -27,15 +27,15 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{route("product.store")}}" method="POST" enctype="multipart/form-data">
+              <form action="{{route("category.store")}}" method="POST">
                 @csrf
                 <div class="card-body">
                   <div class="row">
                     <div class="col-lg">
                       <div class="form-group">
-                        <label for="name">Nama Produk</label>
+                        <label for="name">Nama Kategori</label>
                         <input
-                          type="text" name="name"
+                          type="text" name="name" value="{{$category->name}}"
                           class="form-control"
                           id="name"
                           placeholder="Nama produk"
@@ -48,27 +48,10 @@
                           class="form-control"
                           id="desc" name="description"
                           placeholder="Deskripsi"
-                        ></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label>Kategori</label>
-                        <select class="custom-select" name="category_id">
-                          @foreach ($categories as $category)
-                          <option value="{{$category->id}}">{{$category->name}}</option>
-                          @endforeach
-                        </select>
+                        >{{$category->description}}"</textarea>
                       </div>
                     </div>
                     <div class="col-lg">
-                      <div class="form-group">
-                        <label for="price">Harga</label>
-                        <input
-                          type="number" name="price"
-                          class="form-control"
-                          id="price"
-                          placeholder="Harga"
-                        />
-                      </div>
                       <div class="form-group">
                         <label for="exampleInputFile">Gambar Produk</label>
                         <div class="input-group">
@@ -76,11 +59,11 @@
                             <input
                               type="file"
                               class="custom-file-input"
-                              id="image" name="product_image"
+                              id="exampleInputFile"
                             />
                             <label
                               class="custom-file-label"
-                              for="image"
+                              for="exampleInputFile"
                               >Choose file</label
                             >
                           </div>

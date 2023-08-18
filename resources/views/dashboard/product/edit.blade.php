@@ -9,25 +9,14 @@
           <!-- left column -->
           <div class="col-md">
             <!-- general form elements -->
-            @if (session('success'))
-            <div class="alert alert-success w-50" role="alert">
-                {{ session('success') }}
-            </div>                  
-            @endif
-            @if ($errors->any())
-                @foreach ($errors->all() as $err)
-                <div class="alert alert-danger w-50" role="alert">
-                    {{ $err }}
-                </div>
-                @endforeach
-            @endif
             <div class="card card-dark">
               <div class="card-header">
-                <h3 class="card-title">Tambah Produk</h3>
+                <h3 class="card-title">Edit Produk</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{route("product.store")}}" method="POST" enctype="multipart/form-data">
+              <form action="/8607101e-3b82-11ee-be56-0242ac120002/dashboard/product/{{$product->id}}" method="POST">
+                @method("PUT")
                 @csrf
                 <div class="card-body">
                   <div class="row">
@@ -37,7 +26,7 @@
                         <input
                           type="text" name="name"
                           class="form-control"
-                          id="name"
+                          id="name" value="{{$product->name}}"
                           placeholder="Nama produk"
                         />
                       </div>
@@ -45,17 +34,18 @@
                         <label for="desc">Deskripsi</label>
                         <textarea
                           type="text"
-                          class="form-control"
+                          class="form-control" 
                           id="desc" name="description"
-                          placeholder="Deskripsi"
-                        ></textarea>
+                          placeholder="Deskripsi" value="{{$product->description}}"
+                        >{{$product->description}}</textarea>
                       </div>
                       <div class="form-group">
                         <label>Kategori</label>
                         <select class="custom-select" name="category_id">
-                          @foreach ($categories as $category)
-                          <option value="{{$category->id}}">{{$category->name}}</option>
-                          @endforeach
+                          <option value="1">Pakaian</option>
+                          <option value="2">Aksesoris</option>
+                          <option value="3">Vinyl</option>
+                          <option value="4">Shoes</option>
                         </select>
                       </div>
                     </div>
@@ -65,7 +55,7 @@
                         <input
                           type="number" name="price"
                           class="form-control"
-                          id="price"
+                          id="price" value="{{$product->price}}"
                           placeholder="Harga"
                         />
                       </div>
@@ -76,11 +66,11 @@
                             <input
                               type="file"
                               class="custom-file-input"
-                              id="image" name="product_image"
+                              id="exampleInputFile"
                             />
                             <label
                               class="custom-file-label"
-                              for="image"
+                              for="exampleInputFile"
                               >Choose file</label
                             >
                           </div>
