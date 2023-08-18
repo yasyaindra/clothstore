@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -68,8 +69,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $product = Product::find($product->id);
-        // dd($product);
-        return view("dashboard.product.edit", ['product' => $product]);
+        $categories = Category::all();
+        return view("dashboard.product.edit", ['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -77,19 +78,31 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'category_id' => 'required',
+            'product_image' => 'image|file|max:2024',
             'price' => 'required',
         ]);
 
         // dd($request);
-        
+
+        if($request->file('product_image') == null){
+            $imageFile = $request->oldImage;
+        } else {
+            if($request->oldImage){
+                Storage::delete($request->oldImage);
+            }
+            $imageFile = $request->file('product_image')->store('assets/img');
+        };
+
         Product::where('id', $product->id)->update([
             'name' => $request->name,
             'description' => $request->description,
             'category_id' => $request->category_id,
+            'product_image' => $imageFile,
             'price' => $request->price
         ]);
 

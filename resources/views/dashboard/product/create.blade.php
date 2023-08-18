@@ -76,7 +76,7 @@
                             <input
                               type="file"
                               class="custom-file-input"
-                              id="image" name="product_image"
+                              id="image" name="product_image" onchange="previewImage()"
                             />
                             <label
                               class="custom-file-label"
@@ -84,6 +84,9 @@
                               >Choose file</label
                             >
                           </div>
+                        </div>
+                        <div class="mt-3">
+                          <img src="{{asset('assets/img/product.png')}}" class="img-preview img-thumbnail" width="200px">
                         </div>
                       </div>
                     </div>
@@ -108,4 +111,18 @@
     </section>
     <!-- /.content -->
   </div>
+  <script>
+    function previewImage(){
+      const image = document.querySelector('#image');
+      const imgPreview = document.querySelector(".img-preview")
+
+      imgPreview.style.display = 'block';
+
+      const oFReader = new FileReader();
+      oFReader.readAsDataURL(image.files[0]);
+      oFReader.onload = function(oFREvent){
+        imgPreview.src = oFREvent.target.result
+      }
+    }
+  </script>
 @endsection
