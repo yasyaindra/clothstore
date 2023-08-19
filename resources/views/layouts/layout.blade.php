@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg bg-transparent">
       <div class="container">
         <div>
-          <a class="navbar-brand text-white fw-bold" href="#">Distrofy</a>
+          <a class="navbar-brand text-white fw-bold" href="/">Distrofy</a>
         </div>
         <button
           class="navbar-toggler"

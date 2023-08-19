@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -16,13 +17,9 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'home']);
 
-Route::get("/product/{id}", function(){
-    return view("product.index");
-});
+Route::get("/product/{id}", [HomeController::class, 'single_product']);
 
 Route::prefix('8607101e-3b82-11ee-be56-0242ac120002')->group(function () {
     Route::get("dashboard", function(){

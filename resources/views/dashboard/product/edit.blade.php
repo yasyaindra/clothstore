@@ -8,6 +8,18 @@
         <div class="row">
           <!-- left column -->
           <div class="col-md">
+            @if (session('success'))
+            <div class="alert alert-success w-50" role="alert">
+                {{ session('success') }}
+            </div>                  
+            @endif
+            @if ($errors->any())
+                @foreach ($errors->all() as $err)
+                <div class="alert alert-danger w-50" role="alert">
+                    {{ $err }}
+                </div>
+                @endforeach
+            @endif
             <!-- general form elements -->
             <div class="card card-dark">
               <div class="card-header">
@@ -43,7 +55,11 @@
                         <label>Kategori</label>
                         <select class="custom-select" name="category_id">
                           @foreach ($categories as $category)
-                          <option value="{{$category->id}}">{{$category->name}}</option>
+                          @if (!is_null($product->category))
+                            <option value="{{$category->id}}" {{ $category->name == $product->category->name ? 'selected': ''}} >{{ $category->name  }}</option>      
+                          @else
+                            <option value="{{$category->id}}">{{$category->name}}</option>      
+                          @endif
                           @endforeach
                         </select>
                       </div>

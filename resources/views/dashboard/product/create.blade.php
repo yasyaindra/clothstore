@@ -53,9 +53,11 @@
                       <div class="form-group">
                         <label>Kategori</label>
                         <select class="custom-select" name="category_id">
-                          @foreach ($categories as $category)
+                          @forelse ($categories as $category)
                           <option value="{{$category->id}}">{{$category->name}}</option>
-                          @endforeach
+                          @empty                          
+                          <option value="0">Kategori Belum Dibuat</option>
+                          @endforelse
                         </select>
                       </div>
                     </div>

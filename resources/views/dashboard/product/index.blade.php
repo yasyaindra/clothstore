@@ -86,7 +86,7 @@
                         @endif
                       </td>
                       <td>{{$product->name}}</td>
-                      <td>{{$product->category->name}}</td>
+                      <td>{{$product->category->name ?? 'Kosong'  }}</td>
                       <td>
                         {{$product->description}}
                       </td>

@@ -12,7 +12,7 @@
           </li>
           <li class="breadcrumb-item">
             <a href="#" class="text-secondary text-decoration-none"
-              >Clothes</a
+              >{{$product->category->name ?? ''}}</a
             >
           </li>
           <li class="breadcrumb-item text-white" aria-current="page">
@@ -21,11 +21,11 @@
         </ol>
       </nav>
       <div class="col-lg-6">
-        <img src="/assets/img/image.webp" alt="" class="img-fluid" />
+        <img src="{{asset('storage/'. $product->product_image)}}" alt="" class="img-fluid" />
       </div>
       <div class="col-lg-6">
-        <h1>Kaos Gombale</h1>
-        <h6>$100.000, 00</h6>
+        <h1>{{$product->name}}</h1>
+        <h6>${{$product->price}}, 00</h6>
         <br />
         <h6>Quantity</h6>
         <div class="row mb-4">
@@ -58,8 +58,7 @@
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Ipsam, qui.
+                {{$product->description}}
               </div>
             </div>
           </div>

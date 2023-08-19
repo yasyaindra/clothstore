@@ -28,13 +28,14 @@
       </h5>
     </div>
     <div class="row mt-5">
+      @foreach ($categories as $category)
       <div class="col-lg-3 mb-5">
         <div
           class=""
           style="position: relative; text-align: center; color: white"
         >
           <img
-            src="/assets/img/vinyl.jpg"
+            src="{{asset('assets/img/product.png')}}"
             alt="vinyl"
             class="img-fluid"
             style="border-radius: 5px; filter: brightness(50%)"
@@ -48,11 +49,12 @@
               transform: translate(-50%, -50%);
             "
           >
-            Vinyl
+            {{$category->name}}
           </h1>
         </div>
       </div>
-      <div class="col-lg-3 mb-5">
+      @endforeach
+      {{-- <div class="col-lg-3 mb-5">
         <div
           class=""
           style="position: relative; text-align: center; color: white"
@@ -123,21 +125,24 @@
             Shoes
           </h1>
         </div>
-      </div>
+      </div> --}}
     </div>
   </div>
   <div class="container mt-5">
     <div class="row mb-5">
       <h3 class="mb-4">Featured Products</h3>
+      @foreach ($products as $product)
       <div class="col-lg-3 mb-4">
         <div class="card bg-transparent border-dark">
-          <img src="/assets/img/product.jpg" class="card-img-top" alt="..." />
+          <img src="{{asset("storage/". $product->product_image)}}" class="card-img-top" alt="..." />
           <div class="card-body">
-            <h5 class="card-title text-white">Tech Heads</h5>
-            <h6 class="text-secondary">IDR 50.000, 00</h6>
+            <h5 class="card-title text-white">{{$product->name}}</h5>
+            <h6 class="text-secondary">IDR {{$product->price}}, 00</h6>
             <div class="d-flex gap-3 mt-5">
               <div>
-                <h6 class="btn btn-dark">Preview</h6>
+                <a href="/product/{{$product->id}}">
+                  <h6 class="btn btn-dark">Preview</h6>
+                </a>
               </div>
               <div>
                 <h6 class="btn btn-light">Add To Cart</h6>
@@ -146,57 +151,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 mb-4">
-        <div class="card bg-transparent border-dark">
-          <img src="/assets/img/product.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title text-white">Tech Heads</h5>
-            <h6 class="text-secondary">IDR 50.000, 00</h6>
-            <div class="d-flex gap-3 mt-5">
-              <div>
-                <h6 class="btn btn-dark">Preview</h6>
-              </div>
-              <div>
-                <h6 class="btn btn-light">Add To Cart</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 mb-4">
-        <div class="card bg-transparent border-dark">
-          <img src="/assets/img/product.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title text-white">Tech Heads</h5>
-            <h6 class="text-secondary">IDR 50.000, 00</h6>
-            <div class="d-flex gap-3 mt-5">
-              <div>
-                <h6 class="btn btn-dark">Preview</h6>
-              </div>
-              <div>
-                <h6 class="btn btn-light">Add To Cart</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 mb-4">
-        <div class="card bg-transparent border-dark">
-          <img src="/assets/img/product.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title text-white">Tech Heads</h5>
-            <h6 class="text-secondary">IDR 50.000, 00</h6>
-            <div class="d-flex gap-3 mt-5">
-              <div>
-                <h6 class="btn btn-dark">Preview</h6>
-              </div>
-              <div>
-                <h6 class="btn btn-light">Add To Cart</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      @endforeach
     </div>
   </div>
 </div>

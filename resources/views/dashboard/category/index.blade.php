@@ -75,7 +75,6 @@
                         />
                       </td>
                       <td>{{$category->name}}</td>
-                      <td>Kaos</td>
                       <td>
                         {{$category->description}}
                       </td>

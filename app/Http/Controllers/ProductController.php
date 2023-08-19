@@ -37,7 +37,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|unique:products',
             'description' => 'required',
-            'product_image' => 'image|file|max:2024',
+            'product_image' => 'required|image|file|max:2024',
             'category_id' => 'required',
             'price' => 'required',
         ]);
@@ -60,7 +60,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        // 
     }
 
     /**
@@ -82,7 +82,6 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'category_id' => 'required',
             'product_image' => 'image|file|max:2024',
             'price' => 'required',
         ]);

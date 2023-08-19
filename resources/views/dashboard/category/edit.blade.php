@@ -27,7 +27,8 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{route("category.store")}}" method="POST">
+              <form action="/8607101e-3b82-11ee-be56-0242ac120002/dashboard/category/{{$category->id}}" method="POST">
+                @method("PUT")
                 @csrf
                 <div class="card-body">
                   <div class="row">
