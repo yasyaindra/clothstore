@@ -24,18 +24,31 @@
         <img src="{{asset('storage/'. $product->product_image)}}" alt="" class="img-fluid" />
       </div>
       <div class="col-lg-6">
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>{{ session('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        @error('quantity')
+          <div class="alert alert-danger mt-3">{{ $message }}</div>
+        @enderror
         <h1>{{$product->name}}</h1>
         <h6>${{$product->price}}, 00</h6>
         <br />
         <h6>Quantity</h6>
         <div class="row mb-4">
           <div class="col-4 col-lg-4">
-            <div class="mb-3">
-              <input type="text" class="form-control" value="0" />
-            </div>
-            <div class="mb-3">
-              <a href="" class="btn btn-light text-center">Add to Cart</a>
-            </div>
+            <form action="/cart" method="POST">
+              @csrf
+              <div class="mb-3">
+                <input type="text" class="form-control" name="quantity" />
+                <input type="hidden" value="{{$product->id}}" name="product_id">
+              </div>
+              <div class="mb-3">
+                <button type="submit" class="btn btn-light text-center">Add to Cart</button>
+              </div>
+            </form>
           </div>
         </div>
         <div class="accordion accordion-flush" id="accordionFlushExample">

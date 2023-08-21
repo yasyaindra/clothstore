@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Traits\UUids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -15,5 +16,9 @@ class Product extends Model
 
     public function category():BelongsTo {
         return $this->belongsTo(Category::class);
+    }
+
+    public function transaction(): BelongsTo {
+        return $this->belongsTo(Transaction::class);
     }
 }

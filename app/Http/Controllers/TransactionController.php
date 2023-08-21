@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,23 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product_id' => 'required',
+        ]);
+
+        $price = Product::find($request->product_id)->price;
+
+        $total = $price * $request->quantity;
+
+        $transaction = new Transaction([
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+            'total' => $total
+        ]);
+
+        $transaction->save();
+
+        return back()->with('success', 'Product is added to cart!');
     }
 
     /**

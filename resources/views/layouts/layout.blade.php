@@ -69,7 +69,7 @@
             <i class="fa-solid fa-cart-shopping"></i>
           </a>
         </div>
-        <div>9</div>
+        <div>{{{ $transactions_count }}}</div>
       </div>
     </nav>
     {{-- Main Content --}}
@@ -82,7 +82,7 @@
       aria-labelledby="offcanvasExampleLabel"
     >
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Cart (9)</h5>
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Cart ({{$transactions_count}})</h5>
         <button
           type="button"
           class="btn-close"
@@ -92,6 +92,7 @@
       </div>
       <div class="offcanvas-body">
         <div>
+          @foreach ($transactions as $transaction)
           <div class="row mb-4">
             <div class="col-3 col-lg-3">
               <img
@@ -101,19 +102,29 @@
               />
             </div>
             <div class="col col-lg">
-              <h5>Item 1</h5>
-              <span>$100 x 1 = $100</span>
-              <span>Skateboards / Wheels</span>
+              <h5>{{$transaction->product->first()->name}}</h5>
+              <span>$100 x {{$transaction->quantity}} = ${{$transaction->total}}</span>
             </div>
             <div class="col-lg-12 mt-3">
-              <a href="" class="btn btn-light">-</a>
-              <span>10</span>
-              <a href="" class="btn btn-light">+</a>
-              <a href="" class="btn btn-danger"
-                ><i class="fa-solid fa-trash"></i
-              ></a>
+              <div class="row justify-content-start">
+                <div class="col-lg-2">
+                  <a href="" class="btn btn-light">-</a>
+                </div>
+                <div class="col-lg-2">
+                  <input type="text" value="{{$transaction->quantity}}" class="form-control" >
+                </div>
+                <div class="col-lg-2">
+                  <a href="" class="btn btn-light">+</a>
+                </div>
+                <div class="col-lg-2">
+                  <a href="" class="btn btn-danger"
+                    ><i class="fa-solid fa-trash"></i
+                  ></a>
+                </div>
+              </div>
             </div>
           </div>
+          @endforeach
         </div>
         <div>
           <div class="row">

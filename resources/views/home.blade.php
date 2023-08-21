@@ -54,78 +54,6 @@
         </div>
       </div>
       @endforeach
-      {{-- <div class="col-lg-3 mb-5">
-        <div
-          class=""
-          style="position: relative; text-align: center; color: white"
-        >
-          <img
-            src="/assets/img/clothes.jpg"
-            alt="vinyl"
-            class="img-fluid"
-            style="border-radius: 5px; filter: brightness(50%)"
-          />
-          <h1
-            class="fw-bold"
-            style="
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-            "
-          >
-            Clothes
-          </h1>
-        </div>
-      </div>
-      <div class="col-lg-3 mb-5">
-        <div
-          class=""
-          style="position: relative; text-align: center; color: white"
-        >
-          <img
-            src="/assets/img/accessories.jpg"
-            alt="vinyl"
-            class="img-fluid"
-            style="border-radius: 5px; filter: brightness(50%)"
-          />
-          <h1
-            class="fw-bold"
-            style="
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-            "
-          >
-            Accessories
-          </h1>
-        </div>
-      </div>
-      <div class="col-lg-3 mb-5">
-        <div
-          class=""
-          style="position: relative; text-align: center; color: white"
-        >
-          <img
-            src="/assets/img/shoes.jpg"
-            alt="vinyl"
-            class="img-fluid"
-            style="border-radius: 5px; filter: brightness(50%)"
-          />
-          <h1
-            class="fw-bold"
-            style="
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-            "
-          >
-            Shoes
-          </h1>
-        </div>
-      </div> --}}
     </div>
   </div>
   <div class="container mt-5">
@@ -144,9 +72,13 @@
                   <h6 class="btn btn-dark">Preview</h6>
                 </a>
               </div>
+              <form action="/cart" method="POST">
+                @csrf
               <div>
-                <h6 class="btn btn-light">Add To Cart</h6>
-              </div>
+                  <input type="hidden" value="{{$product->id}}" name="product_id" >
+                  <button type="submit" class="btn btn-light">Add To Cart</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

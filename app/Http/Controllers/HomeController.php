@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,14 +12,16 @@ class HomeController extends Controller
     public function home(){
         $products = Product::all()->take(4);
         $categories = Category::all();
-        return view('home', ['products' => $products, 'categories' => $categories]);
+        $transactions = Transaction::all();
+
+        return view('home', ['products' => $products, 'categories' => $categories, 'transactions_count' => $transactions->count(), 'transactions' => $transactions]);
     }
 
     public function single_product(Request $request){
 
         $product = Product::find($request->id);
 
-        // dd($request->id);
-        return view('product.index', ['product' => $product]);
+        $transactions = Transaction::all();
+        return view('product.index', ['product' => $product, 'transactions_count' => $transactions->count(), 'transactions' => $transactions]);
     }
 }
