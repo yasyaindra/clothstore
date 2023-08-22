@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Distrofy</title>
+    <title>Clothestore</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg bg-transparent">
       <div class="container">
         <div>
-          <a class="navbar-brand text-white fw-bold" href="/">Distrofy</a>
+          <a class="navbar-brand text-white fw-bold" href="/">Clothestore</a>
         </div>
         <button
           class="navbar-toggler"
@@ -91,9 +91,15 @@
         ></button>
       </div>
       <div class="offcanvas-body">
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>{{ session('success') }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <div>
           @foreach ($transactions as $transaction)
-          <div class="row mb-4">
+          <div class="row mb-4 justify-content-between">
             <div class="col-3 col-lg-3">
               <img
                 src="/assets/img/image.webp"
@@ -101,25 +107,29 @@
                 alt=""
               />
             </div>
-            <div class="col col-lg">
-              <h5>{{$transaction->product->first()->name}}</h5>
-              <span>$100 x {{$transaction->quantity}} = ${{$transaction->total}}</span>
+            <div class="col col-lg-5 text-end">
+              <h5>{{$transaction->product->first()->name ?? "Kosong"}}</h5>
+              <span>${{$transaction->product->first()->price ?? 0}} x {{$transaction->quantity}} = ${{$transaction->total}}</span>
             </div>
             <div class="col-lg-12 mt-3">
               <div class="row justify-content-start">
                 <div class="col-lg-2">
-                  <a href="" class="btn btn-light">-</a>
+                  <a href="" class="btn btn-light"><i class="fa-solid fa-minus"></i></a>
                 </div>
                 <div class="col-lg-2">
                   <input type="text" value="{{$transaction->quantity}}" class="form-control" >
                 </div>
                 <div class="col-lg-2">
-                  <a href="" class="btn btn-light">+</a>
+                  <a href="" class="btn btn-light"><i class="fa-solid fa-plus"></i></a>
                 </div>
                 <div class="col-lg-2">
-                  <a href="" class="btn btn-danger"
-                    ><i class="fa-solid fa-trash"></i
-                  ></a>
+                  <form action="/cart/{{$transaction->id}}" method="POST" class="d-inline">
+                    @method("DELETE")
+                    @csrf
+                    <button type="submit" class="btn btn-danger">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -132,7 +142,7 @@
               <p>Subtotal</p>
             </div>
             <div class="col-5 col-lg-5 text-end">
-              <p>$100</p>
+              <p>${{$subtotal}}</p>
             </div>
           </div>
           <div class="row">

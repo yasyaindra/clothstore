@@ -24,12 +24,14 @@ Route::get("/product/{id}", [HomeController::class, 'single_product'])->name('si
 
 Route::resource('cart', TransactionController::class);
 
+
 Route::prefix('8607101e-3b82-11ee-be56-0242ac120002')->group(function () {
     Route::get("dashboard", function(){
         return view("dashboard.index");
     })->name("dashboard.index");
     
     Route::resource('dashboard/product', ProductController::class);
+
     Route::resource('dashboard/category', CategoryController::class);
 
 

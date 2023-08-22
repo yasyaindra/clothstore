@@ -14,14 +14,16 @@ class HomeController extends Controller
         $categories = Category::all();
         $transactions = Transaction::all();
 
-        return view('home', ['products' => $products, 'categories' => $categories, 'transactions_count' => $transactions->count(), 'transactions' => $transactions]);
+        $subtotal = Transaction::sum('total');
+
+        return view('home', ['products' => $products, 'categories' => $categories, 'transactions_count' => $transactions->count(), 'transactions' => $transactions, 'subtotal' => $subtotal]);
     }
 
     public function single_product(Request $request){
 
         $product = Product::find($request->id);
-
         $transactions = Transaction::all();
-        return view('product.index', ['product' => $product, 'transactions_count' => $transactions->count(), 'transactions' => $transactions]);
+        $subtotal = Transaction::sum('total');
+        return view('product.index', ['product' => $product, 'transactions_count' => $transactions->count(), 'transactions' => $transactions,'subtotal' => $subtotal]);
     }
 }

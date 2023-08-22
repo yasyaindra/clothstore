@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Distrofy | Login</title>
+    <title>Clothestore | Login</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,7 +18,7 @@
       style="height: 100vh"
     >
       <div class="col-lg-4">
-        <h2 class="pb-3">Distrofy</h2>
+        <h2 class="pb-3">Clothestore</h2>
         <div class="card border-0">
           <div class="card-body bg-dark text-white">
             @if ($errors->any())
