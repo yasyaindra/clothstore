@@ -31,18 +31,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
+            @foreach ($categories as $cat)
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">Clothes</a>
+              <a class="nav-link text-white" href="#">{{$cat->name}}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Vinyl</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Shoes</a>
-            </li>
-            <li class="nav-item text-white">
-              <a class="nav-link text-white" href="#">Accessories</a>
-            </li>
+            @endforeach
           </ul>
         </div>
         <div>
@@ -58,20 +51,33 @@
             </button>
           </form>
         </div>
-        <div class="p-3">
-          <a
-            class="text-white"
-            data-bs-toggle="offcanvas"
-            href="#offcanvasExample"
-            role="button"
-            aria-controls="offcanvasExample"
-          >
-            <i class="fa-solid fa-cart-shopping"></i>
-          </a>
+        <div class="row align-items-center gap-3">
+          <div class="col-2 p-3">
+            <a
+              class="text-white"
+              data-bs-toggle="offcanvas"
+              href="#offcanvasExample"
+              role="button"
+              aria-controls="offcanvasExample"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+          </div>
+          <div class="col-2">
+            <span>
+              {{{ $transactions_count }}}
+            </span>
+          </div>
         </div>
-        <div>{{{ $transactions_count }}}</div>
       </div>
     </nav>
+    @if (session('success'))
+    <div class="bg-success" role="alert">
+      <div class="container">
+        {{ session('success') }}
+      </div>
+    </div>
+    @endif
     {{-- Main Content --}}
     @yield('content')
     {{-- End Main --}}
@@ -113,16 +119,16 @@
             </div>
             <div class="col-lg-12 mt-3">
               <div class="row justify-content-start">
-                <div class="col-lg-2">
+                <div class="col-2 col-lg-2">
                   <a href="" class="btn btn-light"><i class="fa-solid fa-minus"></i></a>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2 col-lg-2">
                   <input type="text" value="{{$transaction->quantity}}" class="form-control" >
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2 col-lg-2">
                   <a href="" class="btn btn-light"><i class="fa-solid fa-plus"></i></a>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2 col-lg-2">
                   <form action="/cart/{{$transaction->id}}" method="POST" class="d-inline">
                     @method("DELETE")
                     @csrf
@@ -166,12 +172,12 @@
               <p>Total</p>
             </div>
             <div class="col-5 col-lg-5 text-end">
-              <p>$100000</p>
+              <p>${{$subtotal}}</p>
             </div>
           </div>
           <div class="container">
             <div class="row">
-              <a href="" class="col-lg btn-light btn">Procced To Buy</a>
+              <a href="/order" class="col-lg btn-light btn">Procced To Buy</a>
             </div>
           </div>
         </div>

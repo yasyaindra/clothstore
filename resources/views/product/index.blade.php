@@ -6,7 +6,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#" class="text-secondary text-decoration-none"
+            <a href="/" class="text-secondary text-decoration-none"
               >Products</a
             >
           </li>

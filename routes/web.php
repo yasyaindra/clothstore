@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 
@@ -24,6 +25,8 @@ Route::get("/product/{id}", [HomeController::class, 'single_product'])->name('si
 
 Route::resource('cart', TransactionController::class);
 
+Route::get("/order", [OrderController::class, 'create']);
+Route::post("/order", [OrderController::class, 'store']);
 
 Route::prefix('8607101e-3b82-11ee-be56-0242ac120002')->group(function () {
     Route::get("dashboard", function(){
